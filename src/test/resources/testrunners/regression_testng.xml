@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+<suite name="API Regression Suite" verbose="3">
+
+<!--
+	 <test name="GET User Test">
+		<parameter name="baseUrl" value="https://gorest.co.in" />
+
+		<classes>
+			<class name="com.qa.api.tests.GetUserTest" />
+		</classes>
+	</test>
+
+	<test name="Update User Test">
+		<parameter name="baseUrl" value="https://gorest.co.in" />
+
+		<classes>
+			<class name="com.qa.api.tests.UpdateUserTest" />
+		</classes>
+	</test>
+
+	<test name="Partial Update User Test">
+		<parameter name="baseUrl" value="https://gorest.co.in" />
+
+		<classes>
+			<class name="com.qa.api.tests.PatchUserTest" />
+		</classes>
+	</test>
+
+	<test name="Delete User Test">
+		<parameter name="baseUrl" value="https://gorest.co.in" />
+
+		<classes>
+			<class name="com.qa.api.tests.DeleteUserTest" />
+		</classes>
+	</test>-->
+
+
+	<test name="Create User Test">
+		<!--<parameter name="baseUrl" value="https://gorest.co.in" />-->
+
+		<classes>
+			<class name="com.qa.api.tests.CreateUserTest" />
+		</classes>
+	</test> 
+	
+	
+	<test name="Req Res API Test">
+		<parameter name="baseUrl" value="https://reqres.in" />
+
+		<classes>
+			<class name="com.qa.reqres.api.tests.ReqResTest" />
+		</classes>
+	</test>
+	
+	
+	<test name="Contacts API Test">
+		<parameter name="baseUrl" value="https://thinking-tester-contact-list.herokuapp.com" />
+
+		<classes>
+			<class name="com.qa.contacts.api.tests.ContactsAPITest" />
+		</classes>
+	</test>
+	
+	
+	<test name="Product API Test">
+		<parameter name="baseUrl" value="https://fakestoreapi.com" />
+
+		<classes>
+			<class name="com.qa.fakestoreproducts.api.tests.ProductsAPIsTest" />
+		</classes>
+	</test>
+
+
+
+
+</suite>
