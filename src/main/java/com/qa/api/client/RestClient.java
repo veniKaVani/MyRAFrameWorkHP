@@ -42,13 +42,13 @@ public class RestClient {
 	
 	
 	//1.creating the variable base Url:
-	private String baseURL = ConfigManager.getProp("baseUrl");
+//	private String baseURL = ConfigManager.getProp("baseUrl");
 	
-	private RequestSpecification setUpRequest(AuthType authType, ContentType contentType) {
+	private RequestSpecification setUpRequest(String baseUrl, AuthType authType, ContentType contentType) {
 	
 	//2.
     RequestSpecification reqSpec = RestAssured.given().log().all()
-		             					.baseUri(baseURL)
+		             					.baseUri(baseUrl)
 		             						.contentType(contentType)
 		             							.accept(contentType);
     //3.
@@ -104,10 +104,11 @@ public class RestClient {
 	 * @param contentType
 	 * @return it returns the get api response
 	 */
-	public Response getAPICall(String endPoint,Map<String, String>queryParams, Map<String, String>pathParams,
+	//Refactoring: setting up the base url in each of the CRUD calls and commenting step 1.
+	public Response getAPICall(String baseUrl, String endPoint,Map<String, String>queryParams, Map<String, String>pathParams,
 			                       AuthType authType, ContentType contentType) {
 		
-		RequestSpecification reqSpec = setUpRequest(authType, contentType);
+		RequestSpecification reqSpec = setUpRequest(baseUrl, authType, contentType);
 		
 		applyParamsNullCheck(reqSpec,queryParams, pathParams);
 
@@ -127,10 +128,10 @@ public class RestClient {
 	 * @param contentType
 	 * @return it returns the post api response
 	 */
-	public <T> Response postAPICAll(String endPoint, T body,Map<String, String>queryParams, 
+	public <T> Response postAPICAll(String baseUrl, String endPoint, T body,Map<String, String>queryParams, 
 			Map<String, String>pathParams, AuthType authType, ContentType contentType) {
 		
-		RequestSpecification reqSpec = setUpRequest(authType, contentType);
+		RequestSpecification reqSpec = setUpRequest(baseUrl, authType, contentType);
 		
 //		if(queryParams!=null) {
 //			reqSpec.queryParams(queryParams);
@@ -158,10 +159,10 @@ public class RestClient {
 	 * @param contentType
 	 * @return it returns the post api response
 	 */
-	public Response postAPICAll(String endPoint, File file,Map<String, String>queryParams, 
+	public Response postAPICAll(String baseUrl, String endPoint, File file,Map<String, String>queryParams, 
 			Map<String, String>pathParams, AuthType authType, ContentType contentType) {
 		
-		RequestSpecification reqSpec = setUpRequest(authType, contentType);
+		RequestSpecification reqSpec = setUpRequest(baseUrl, authType, contentType);
 		
 		applyParamsNullCheck(reqSpec,queryParams, pathParams);
 		
@@ -180,10 +181,10 @@ public class RestClient {
 	 * @param contentType
 	 * @return it returns the put api response
 	 */
-	public <T> Response putAPICAll(String endPoint, T body,Map<String, String>queryParams, 
+	public <T> Response putAPICAll(String baseUrl, String endPoint, T body,Map<String, String>queryParams, 
 			Map<String, String>pathParams, AuthType authType, ContentType contentType) {
 		
-		RequestSpecification reqSpec = setUpRequest(authType, contentType);
+		RequestSpecification reqSpec = setUpRequest(baseUrl, authType, contentType);
 		
 		applyParamsNullCheck(reqSpec,queryParams, pathParams);
 		
@@ -202,10 +203,10 @@ public class RestClient {
 	 * @param contentType
 	 * @return it returns the patch api response
 	 */
-	public <T> Response patchAPICAll(String endPoint, T body,Map<String, String>queryParams, 
+	public <T> Response patchAPICAll(String baseUrl, String endPoint, T body,Map<String, String>queryParams, 
 			Map<String, String>pathParams, AuthType authType, ContentType contentType) {
 		
-		RequestSpecification reqSpec = setUpRequest(authType, contentType);
+		RequestSpecification reqSpec = setUpRequest(baseUrl, authType, contentType);
 		
 		applyParamsNullCheck(reqSpec,queryParams, pathParams);
 		
@@ -224,10 +225,10 @@ public class RestClient {
 	 * @param contentType
 	 * @return it returns the delete api response
 	 */
-	public  Response deleteAPICAll(String endPoint, Map<String, String>queryParams, 
+	public  Response deleteAPICAll(String baseUrl, String endPoint, Map<String, String>queryParams, 
 			Map<String, String>pathParams, AuthType authType, ContentType contentType) {
 		
-		RequestSpecification reqSpec = setUpRequest(authType, contentType);
+		RequestSpecification reqSpec = setUpRequest(baseUrl, authType, contentType);
 		
 		applyParamsNullCheck(reqSpec,queryParams, pathParams);
 		

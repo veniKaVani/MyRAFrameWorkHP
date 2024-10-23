@@ -3,15 +3,9 @@
 
 <suite name="API Regression Suite" verbose="3">
 
-
-	 <test name="FakeStoreJsonValidatorAllFunctionsTest">
-
-		<classes>
-			<class name="com.qa.api.exercisetests.JsonValidatorFunctionHWTests" />
-		</classes>
-	</test>
-	
-	<test name="GET User Test">
+<!--
+	 <test name="GET User Test">
+		<parameter name="baseUrl" value="https://gorest.co.in" />
 
 		<classes>
 			<class name="com.qa.api.tests.GetUserTest" />
@@ -19,6 +13,7 @@
 	</test>
 
 	<test name="Update User Test">
+		<parameter name="baseUrl" value="https://gorest.co.in" />
 
 		<classes>
 			<class name="com.qa.api.tests.UpdateUserTest" />
@@ -26,6 +21,7 @@
 	</test>
 
 	<test name="Partial Update User Test">
+		<parameter name="baseUrl" value="https://gorest.co.in" />
 
 		<classes>
 			<class name="com.qa.api.tests.PatchUserTest" />
@@ -33,14 +29,16 @@
 	</test>
 
 	<test name="Delete User Test">
+		<parameter name="baseUrl" value="https://gorest.co.in" />
 
 		<classes>
 			<class name="com.qa.api.tests.DeleteUserTest" />
 		</classes>
-	</test>
+	</test>-->
 
 
 	<test name="Create User Test">
+		<!--<parameter name="baseUrl" value="https://gorest.co.in" />-->
 
 		<classes>
 			<class name="com.qa.api.tests.CreateUserTest" />
@@ -49,6 +47,7 @@
 	
 	
 	<test name="Req Res API Test">
+		<parameter name="baseUrl" value="https://reqres.in" />
 
 		<classes>
 			<class name="com.qa.reqres.api.tests.ReqResTest" />
@@ -57,6 +56,7 @@
 	
 	
 	<test name="Contacts API Test">
+		<parameter name="baseUrl" value="https://thinking-tester-contact-list.herokuapp.com" />
 
 		<classes>
 			<class name="com.qa.contacts.api.tests.ContactsAPITest" />
@@ -64,21 +64,8 @@
 	</test>
 	
 	
-	<test name="Product API Test Using Deserialization">
-
-		<classes>
-			<class name="com.qa.fakestoreproducts.api.tests.ProductApiTestUsingDeserialization" />
-		</classes>
-	</test>
-	
-	<test name="Product API Test With Json Path Validator">
-
-		<classes>
-			<class name="com.qa.fakestoreproducts.api.tests.ProductAPITestWithJsonPathValidator" />
-		</classes>
-	</test>
-	
 	<test name="Product API Test">
+		<parameter name="baseUrl" value="https://fakestoreapi.com" />
 
 		<classes>
 			<class name="com.qa.fakestoreproducts.api.tests.ProductsAPIsTest" />

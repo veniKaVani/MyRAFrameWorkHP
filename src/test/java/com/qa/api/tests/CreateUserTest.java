@@ -6,6 +6,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import com.qa.api.base.BaseTest;
+import com.qa.api.constants.AppConstants;
 import com.qa.api.constants.AuthType;
 import com.qa.api.pojos.User;
 import com.qa.api.utilities.StringUtility;
@@ -18,9 +19,9 @@ public class CreateUserTest extends BaseTest {
 	@Test
 	public void createUserTest_TC1() {
 		
-		User user = new User("AdeAkintide",StringUtility.getRandomEmail(),"male","active");
+		User user = new User(null,"AdeAkintide",StringUtility.getRandomEmail(),"male","active");
 		
-		Response response = rc.postAPICAll("/public/v2/users", user, null, null, AuthType.BEARER_TOKEN, ContentType.JSON);
+		Response response = rc.postAPICAll(BASE_URL_GOREST, AppConstants.GOREST_USERS_ALL_ENDPOINT, user, null, null, AuthType.BEARER_TOKEN, ContentType.JSON);
 		Assert.assertEquals(response.getStatusCode(), 201);
 	}
 	//each TC has its own workflow=>independent=>create id, get same id,
@@ -33,7 +34,7 @@ public class CreateUserTest extends BaseTest {
 									.status("inactive")
 										.build();
 		
-		Response response = rc.postAPICAll("/public/v2/users", user, null, null, AuthType.BEARER_TOKEN, ContentType.JSON);
+		Response response = rc.postAPICAll(BASE_URL_GOREST, AppConstants.GOREST_USERS_ALL_ENDPOINT, user, null, null, AuthType.BEARER_TOKEN, ContentType.JSON);
 		Assert.assertEquals(response.getStatusCode(), 201);
 		
 		//fetch user id to be used for validation in the GET call:
@@ -41,7 +42,7 @@ public class CreateUserTest extends BaseTest {
 		System.out.println("user id captured from  POST call response:"+userId);
 		
 		//GET:
-		Response getRes = rc.getAPICall("/public/v2/users/"+userId, null, null, AuthType.BEARER_TOKEN, ContentType.JSON);
+		Response getRes = rc.getAPICall(BASE_URL_GOREST, "/public/v2/users/"+userId, null, null, AuthType.BEARER_TOKEN, ContentType.JSON);
 		Assert.assertEquals(getRes.statusCode(), 200);
 		Assert.assertEquals(getRes.jsonPath().getString("id"), userId);
 		Assert.assertEquals(getRes.jsonPath().getString("name"), user.getName());
@@ -54,7 +55,7 @@ public class CreateUserTest extends BaseTest {
 		
 		File file = new File("./src\\test\\resources\\jsons\\gorestuser.json");
 		
-		Response response = rc.postAPICAll("/public/v2/users", file, null, null, AuthType.BEARER_TOKEN, ContentType.JSON);
+		Response response = rc.postAPICAll(BASE_URL_GOREST, AppConstants.GOREST_USERS_ALL_ENDPOINT, file, null, null, AuthType.BEARER_TOKEN, ContentType.JSON);
 		Assert.assertEquals(response.getStatusCode(), 201);
 	}
 }

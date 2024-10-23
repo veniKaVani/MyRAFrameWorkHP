@@ -4,6 +4,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import com.qa.api.base.BaseTest;
+import com.qa.api.constants.AppConstants;
 import com.qa.api.constants.AuthType;
 import com.qa.api.pojos.User;
 import com.qa.api.utilities.StringUtility;
@@ -24,7 +25,7 @@ public class UpdateUserTest extends BaseTest {
 									.status("inactive")
 										.build();
 		
-		Response postRes = rc.postAPICAll("/public/v2/users", user, null, null, AuthType.BEARER_TOKEN, ContentType.JSON);
+		Response postRes = rc.postAPICAll(BASE_URL_GOREST, AppConstants.GOREST_USERS_ALL_ENDPOINT, user, null, null, AuthType.BEARER_TOKEN, ContentType.JSON);
 		Assert.assertEquals(postRes.getStatusCode(), 201);
 		
 		//fetch user id postRes to be used for validation in the GET call:
@@ -32,7 +33,7 @@ public class UpdateUserTest extends BaseTest {
 		System.out.println("user id captured from  POST call response:"+userId);
 		
 		//2.GET: the same user just gotten created
-		Response getRes = rc.getAPICall("/public/v2/users/"+userId, null, null, AuthType.BEARER_TOKEN, ContentType.JSON);
+		Response getRes = rc.getAPICall(BASE_URL_GOREST, "/public/v2/users/"+userId, null, null, AuthType.BEARER_TOKEN, ContentType.JSON);
 		Assert.assertEquals(getRes.statusCode(), 200);
 		Assert.assertEquals(getRes.jsonPath().getString("id"), userId);
 		
@@ -41,7 +42,7 @@ public class UpdateUserTest extends BaseTest {
 		user.setStatus("active");
 		
 		//3.PUT: update the same user with the above set data for the same user
-		Response putRes = rc.putAPICAll("/public/v2/users/"+userId, user, null, null, AuthType.BEARER_TOKEN, ContentType.JSON);
+		Response putRes = rc.putAPICAll(BASE_URL_GOREST, "/public/v2/users/"+userId, user, null, null, AuthType.BEARER_TOKEN, ContentType.JSON);
 		Assert.assertEquals(putRes.statusCode(), 200);
 		Assert.assertEquals(putRes.jsonPath().getString("id"), userId);
 		Assert.assertEquals(putRes.jsonPath().getString("email"), user.getEmail());
